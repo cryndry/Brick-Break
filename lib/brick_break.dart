@@ -80,7 +80,7 @@ class BrickBreak extends FlameGame with HasCollisionDetection, KeyboardEvents, T
           (rand.nextDouble() - 0.5) * width,
           height * 0.2,
         ).normalized()
-          ..scale(height / 4)));
+          ..scale(height * 0.4)));
 
     bat = Bat(
       position: Vector2(gameWidth * 0.5, gameHeight - 64),

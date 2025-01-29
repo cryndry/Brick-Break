@@ -22,14 +22,6 @@ class Ball extends CircleComponent with CollisionCallbacks, HasGameRef<BrickBrea
         );
 
   final Vector2 velocity;
-  late double difficultyModifier;
-
-  @override
-  Future<void> onLoad() {
-    difficultyModifier = initialDifficulty;
-
-    return super.onLoad();
-  }
 
   @override
   void update(double dt) {
@@ -69,7 +61,10 @@ class Ball extends CircleComponent with CollisionCallbacks, HasGameRef<BrickBrea
         velocity.x *= -1;
       }
 
-      velocity.setFrom(velocity * difficultyModifier);
+      Vector2 newVelocity = velocity * difficultyFactor;
+      newVelocity.x = newVelocity.x.clamp(-game.width * 0.8, game.width * 0.8);
+      newVelocity.y = newVelocity.y.clamp(-game.height * 0.8, game.height * 0.8);
+      velocity.setFrom(newVelocity);
     } else {
       debugPrint('collision with $other');
     }
