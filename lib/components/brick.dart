@@ -21,7 +21,8 @@ class Brick extends RectangleComponent with CollisionCallbacks, HasGameReference
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
 
-    removeFromParent(); // remove the brick
+    removeFromParent();
+    game.score.value += 1;
 
     if (game.world.children.query<Brick>().length == 1) {
       game.playState = PlayState.won;

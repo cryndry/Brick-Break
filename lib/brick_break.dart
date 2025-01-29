@@ -29,6 +29,8 @@ class BrickBreak extends FlameGame with HasCollisionDetection, KeyboardEvents, T
 
   late Bat bat;
 
+  final ValueNotifier<int> score = ValueNotifier(0);
+
   late PlayState _playState;
   PlayState get playState => _playState;
   set playState(PlayState playState) {
@@ -68,6 +70,7 @@ class BrickBreak extends FlameGame with HasCollisionDetection, KeyboardEvents, T
     world.removeAll(world.children.query<Ball>());
     world.removeAll(world.children.query<Brick>());
 
+    score.value = 0;
     playState = PlayState.playing;
 
     world.add(Ball(
