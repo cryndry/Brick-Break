@@ -6,9 +6,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-
-class Brick extends RectangleComponent
-    with CollisionCallbacks, HasGameReference<BrickBreak> {
+class Brick extends RectangleComponent with CollisionCallbacks, HasGameReference<BrickBreak> {
   Brick({required super.position, required Color color})
       : super(
           size: Vector2(brickWidth, brickHeight),
@@ -20,13 +18,13 @@ class Brick extends RectangleComponent
         );
 
   @override
-  void onCollisionStart(
-      Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
-    
+
     removeFromParent(); // remove the brick
 
     if (game.world.children.query<Brick>().length == 1) {
+      game.playState = PlayState.won;
       game.world.removeAll(game.world.children.query<Ball>());
       game.world.removeAll(game.world.children.query<Bat>());
     }

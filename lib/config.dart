@@ -1,6 +1,5 @@
-const double gameWidth = 820;
+const double gameWidth = 800;
 const double gameHeight = 1600;
-const int playAreaColor = 0xFFFFFFFF;
 const initialDifficulty = 1.03;
 
 const double ballRadius = gameWidth * 0.02;

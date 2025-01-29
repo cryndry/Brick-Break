@@ -5,6 +5,7 @@ import 'package:brick_breaker/components/play_area.dart';
 import 'package:brick_breaker/config.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 
 class Ball extends CircleComponent with CollisionCallbacks, HasGameRef<BrickBreak> {
@@ -48,7 +49,11 @@ class Ball extends CircleComponent with CollisionCallbacks, HasGameRef<BrickBrea
       } else if (intersectionPoints.first.x >= game.width) {
         velocity.x *= -1;
       } else if (intersectionPoints.first.y >= game.height) {
-        removeFromParent(); // game over
+        add(RemoveEffect(
+            delay: 0.35,
+            onComplete: () {
+              game.playState = PlayState.gameOver;
+            }));
       }
     } else if (other is Bat) {
       velocity.y *= -1;
